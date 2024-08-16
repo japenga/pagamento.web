@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enviar Comprovante</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f4f9;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            text-align: center;
+            background: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            max-width: 600px;
+            width: 100%;
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        h1 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .upload-container {
+            margin: 20px 0;
+            position: relative;
+        }
+
+        .upload-button {
+            padding: 15px 30px;
+            font-size: 18px;
+            color: #ffffff;
+            background-color: #4CAF50; /* Cor para o botão de upload */
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .upload-button:hover {
+            background-color: #45a049; /* Cor mais escura para hover */
+        }
+
+        .upload-button:focus {
+            outline: none;
+        }
+
+        .file-input {
+            display: none;
+        }
+
+        .file-label {
+            display: block;
+            padding: 15px 30px;
+            font-size: 18px;
+            color: #ffffff;
+            background-color: #007bff; /* Cor padrão para o botão de upload */
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .file-label:hover {
+            background-color: #0056b3; /* Cor mais escura para hover */
+        }
+
+        .file-label:focus {
+            outline: none;
+        }
+
+        .upload-container input[type="file"] + .file-label::after {
+            content: 'Escolher arquivo';
+        }
+
+        .upload-container input[type="file"]:valid + .file-label::after {
+            content: 'Arquivo selecionado';
+        }
+
+        .upload-container input[type="file"]:focus + .file-label::after {
+            content: 'Escolha um arquivo';
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @media (max-width: 768px) {
+            .upload-button, .file-label {
+                font-size: 16px;
+                padding: 12px 25px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Enviar Comprovante</h1>
+        <p>Escolha o arquivo de comprovante e clique no botão abaixo para enviar diretamente para o WhatsApp.</p>
+        <div class="upload-container">
+            <input type="file" id="file-upload" name="file-upload" accept="image/*" class="file-input">
+            <label for="file-upload" class="file-label">Escolher arquivo</label>
+        </div>
+        <button id="send-button" class="upload-button">Enviar Comprovante</button>
+    </div>
+
+    <script>
+        document.getElementById('send-button').addEventListener('click', function() {
+            var fileInput = document.getElementById('file-upload');
+            var file = fileInput.files[0];
+
+            if (file) {
+                var whatsappURL = 'https://wa.me/557591253180?text=Ol%C3%A1%2C%20aqui%20est%C3%A1%20meu%20comprovante%20de%20pagamento%2C%20arquivo%3A%20' + encodeURIComponent(file.name);
+                window.open(whatsappURL, '_blank');
+            } else {
+                alert('Por favor, selecione um arquivo antes de enviar.');
+            }
+        });
+    </script>
+</body>
+</html>
